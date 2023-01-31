@@ -1,0 +1,78 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [macos-11, ubuntu-20.04, windows-latest]
+    runs-on: ${{ matrix.platform }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-20.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libwebkit2gtk-4.0-dev librsvg2-dev
+
+      - name: Install dependencies (mac os only)
+        if: matrix.platform == 'macos-11'
+        run: |
+          brew install llvm cmake openssl
+          echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> /Users/runner/.bash_profile
+          export LDFLAGS="-L/usr/local/opt/llvm/lib"
+          export CPPFLAGS="-I/usr/local/opt/llvm/include"
+          rustup target add aarch64-apple-darwin
+
+      - name: Rust setup
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Sync node version and setup cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+          cache-dependency-path: karen-ui/package-lock.json
+
+      - name: Install app dependencies and build web
+        run: npm install
+
+      - name: Add aarch64-apple-darwin target (mac os only)
+        if: matrix.platform == 'macos-11'
+        run: |
+          rustup target add aarch64-apple-darwin
+
+
+      - name: Build the app on mac
+        if: matrix.platform == 'macos-11'
+        uses: tauri-apps/tauri-action@dev
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: v__VERSION__
+          releaseName: "karen-ui v__VERSION__"
+          releaseBody: "See the assets to download this version and install."
+          releaseDraft: true
+          args: "--target universal-apple-darwin"
+
+      - name: Build the app
+        if: matrix.platform != 'macos-11'
+        uses: tauri-apps/tauri-action@v0
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: v__VERSION__
+          releaseName: "karen-ui v__VERSION__"
+          releaseBody: "See the assets to download this version and install."
+          releaseDraft: true
+          configPath: "src-tauri/tauri.conf.json"
