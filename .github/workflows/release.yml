@@ -40,7 +40,7 @@ jobs:
         with:
           node-version: "lts/*"
           cache: "npm"
-          cache-dependency-path: karen-ui/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install app dependencies and build web
         run: npm install
