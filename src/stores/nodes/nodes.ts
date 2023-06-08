@@ -114,26 +114,23 @@ function getDependentNodes(nodeTableName: string, nodeAddress: string) {
 export async function saveFile(namespace: string, text: string): Promise<boolean> {
     const jsonString = text.trim()
     var nodes = JSON.parse(jsonString)
-
-    for (let key in nodes) {
-        const node = nodes[key]
-        const stringifiedNode = JSON.stringify(node)
-        try {
-            await invoke('set_value', { namespace: namespace, key: key, node: stringifiedNode });
-        } catch (error) {
-            console.error(error)
-        }
+    try {
+        localStorage.setItem(namespace, text);
+    } catch (error) {
+        console.error(error)
     }
+
     return true
 }
 
 async function fetchNodes(namespace: string) {
-    const rawNodes = await invoke("get_values", { namespace: namespace })
+    const json = localStorage.getItem(namespace)
+    if (json !== null) {
+        const rawNodes = JSON.parse(json);
 
-    if (isStringArray(rawNodes)) {
         const nodeTables = new Map<string, Map<string, Node>>()
-        const nodeMap = rawNodes
-            .map(rawNode => deserializeNode(rawNode))
+        const nodeMap = Object.values(rawNodes)
+            .map(rawNode => deserializeNode(JSON.stringify(rawNode)))
             .reduce((acc, node) => {
                 acc.set(node.address as string, node)
                 return acc
@@ -141,24 +138,19 @@ async function fetchNodes(namespace: string) {
         nodeTables.set(namespace, nodeMap)
         nodeStore.nodesStore.set(nodeTables)
     } else {
-        throw Error(`The data retrived from the backend is of type ${typeof rawNodes} instead of string[]`)
+        throw Error(`The namespace ${namespace} was not found.`)
     }
-
 }
 
 export async function fetchNamespaces() {
-    const namespaces = await invoke("list_namespaces")
-    if (isStringArray(namespaces)) {
-        return namespaces
-            .filter(namespace => namespace !== "default")
-    } else {
-        throw Error(`The data retrived from the backend is of type ${typeof namespaces} instead of string[]`)
-    }
+    const namespaces = Object.keys(localStorage)
+    return namespaces
+        .filter(namespace => namespace !== "default")
 }
 
 export async function dropNamespace(namespace: string) {
     try {
-        await invoke("drop_namespace", { namespace: namespace })
+        localStorage.removeItem(namespace)
     }
     catch (error) {
         throw Error(`${error}`)
@@ -190,12 +182,6 @@ function deserializeNode(nodeJsonString: string): Node {
         }
     }
     return parsedNode;
-}
-
-function isStringArray(value: unknown): value is string[] {
-    return (
-        Array.isArray(value) && value.every(elem => typeof elem === "string")
-    )
 }
 
 function getSelectedNodeTable() {
