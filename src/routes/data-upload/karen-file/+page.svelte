@@ -1,10 +1,10 @@
-<script lang="ts">
+ <script lang="ts">
     import { error } from "@sveltejs/kit";
     import {
         saveFile,
         fetchNamespaces,
         dropNamespace as storeDropNamespace,
-    } from "../../stores/nodes/nodes";
+    } from "../../../stores/nodes/nodes";
 
     let files: FileList | undefined = undefined;
     let fetchNamespacePromise = fetchNamespaces();
@@ -24,6 +24,7 @@
                     if (customNamespaceName !== ""){
                         namespace = customNamespaceName
                     }
+                    console.log(text)
                     await saveFile(namespace, text);
                     refetchNamespaces();
                 } catch (error) {
