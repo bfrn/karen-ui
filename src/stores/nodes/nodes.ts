@@ -112,7 +112,6 @@ function getDependentNodes(nodeTableName: string, nodeAddress: string) {
 
 export async function saveFile(namespace: string, text: string): Promise<boolean> {
     const jsonString = text.trim()
-    var nodes = JSON.parse(jsonString)
     try {
         localStorage.setItem(namespace, text);
     } catch (error) {
