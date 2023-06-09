@@ -1,7 +1,6 @@
 import { writable } from "svelte/store";
 import type { Writable } from "svelte/store";
 import { NodeTypes, Node, Module, Resource, ResourceStates, ReferenceResource, Provider } from './preprocessor'
-import { invoke } from "@tauri-apps/api/tauri";
 
 
 const nodesStoreState = writable(new Map<string, Map<string, Node>>());
