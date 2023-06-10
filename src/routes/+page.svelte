@@ -1,6 +1,7 @@
 <script lang="ts">
     import { MenuCard } from "./menu-card";
     import { fetchNamespaces, nodeStore } from "../stores/nodes/nodes";
+    import { goto } from '$app/navigation';
 
     const cards = [
         new MenuCard(
@@ -52,24 +53,22 @@
                                             {/if}
                                         {/each}
                                     </select>
-                                    <a href={card.route}>
-                                        <button class="btn">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                stroke-width="1.5"
-                                                stroke="currentColor"
-                                                class="w-6 h-6"
-                                            >
-                                                <path
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                                                />
-                                            </svg>
-                                        </button>
-                                    </a>
+                                    <button class="btn" on:click={ () => goto(card.route)}>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke-width="1.5"
+                                            stroke="currentColor"
+                                            class="w-6 h-6"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+                                            />
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
                         {:else}

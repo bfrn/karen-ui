@@ -1,13 +1,17 @@
+<script>
+    import SignInStatus from "./auth/SignInStatus.svelte";
+</script>
+
 <div class="navbar bg-base-100 border-b-2">
     <div class="flex-1">
         <a class="btn btn-ghost normal-case text-xl" href="/">Karen-UI</a>
     </div>
+    <div class="flex-1">
+        <SignInStatus />
+    </div>
     <div class="flex-none">
         <a href="/files">
-            <button
-                class="btn btn-square btn-ghost mr-2"
-                href="/files"
-            >
+            <button class="btn btn-square btn-ghost mr-2">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"

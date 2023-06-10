@@ -2,10 +2,17 @@
     import IamVisualizer from "$lib/iam-visualizer/IamVisualizer.svelte";
     import { nodeStore } from "../../stores/nodes/nodes";
     import { iconStore } from "../../stores/icons/icons";
+    import { page } from "$app/stores";
+    import { goto } from "$app/navigation";
 
     var selectedNodeTable = nodeStore.getters.getSelectedNodeTable();
 
     async function initGraphData() {
+        // TODO: better client-side auth handling
+        if ($page.data.session === null) {
+            goto("/auth/signin");
+        }
+
         await nodeStore.actions.fetchNodes(selectedNodeTable);
         await iconStore.actions.fetchIcons();
     }

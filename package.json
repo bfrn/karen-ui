@@ -11,6 +11,8 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
   },
   "dependencies": {
+    "@auth/core": "^0.8.2",
+    "@auth/sveltekit": "^0.3.1",
     "cytoscape": "^3.23.0",
     "cytoscape-fcose": "^2.1.0",
     "daisyui": "^2.33.0"
