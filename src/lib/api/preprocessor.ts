@@ -1,20 +1,27 @@
-const url = "http://localhost:3000"
+const preprocessorURL = "http://localhost:3000"
 
+interface ParseFileRequestData {
+    data: string;
+    type: string;
+    url: string | null;
+}
 
-export async function fetchParsedStateFile(stateFile:string): Promise<string> {
-    const encoder = new TextEncoder();
-    // Encode the JSON string to a Uint8Array
-    const jsonBytes = encoder.encode(stateFile);
+export async function fetchParsedFile(content: string,fileType:string, terraformEntrypointURL: string|null = null): Promise<string> {
+    const requestData: ParseFileRequestData = {
+        data: content,
+        type: fileType,
+        url: terraformEntrypointURL
+    };
     const response = await fetch(
-        url + "/",
+        preprocessorURL + "/parse",
         {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-                },
-            body: jsonBytes
+            },
+            body: JSON.stringify(requestData)
         }
-        )
+    )
     return await response.json()
 }
