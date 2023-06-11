@@ -6,15 +6,12 @@
     <div class="flex-1">
         <a class="btn btn-ghost normal-case text-xl" href="/">Karen-UI</a>
     </div>
-    <div class="flex btn">
-        <a  href="/modules">Modules</a>
+    <div class="flex btn m-2">
+        <a href="/modules">Modules</a>
     </div>
-    <div class="flex-1">
-        <SignInStatus />
-    </div>
-    <div class="flex-none">
+    <div class="flex-none m-2">
         <a href="/files">
-            <button class="btn btn-square btn-ghost mr-2">
+            <button class="btn btn-square btn-ghost">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -31,5 +28,9 @@
                 </svg>
             </button>
         </a>
+    </div>
+
+    <div class="flex m-2">
+        <SignInStatus />
     </div>
 </div>
