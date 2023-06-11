@@ -1,36 +1,67 @@
-<script>
+<script lang="ts">
     import SignInStatus from "./auth/SignInStatus.svelte";
 </script>
 
-<div class="navbar bg-base-100 border-b-2">
-    <div class="flex-1">
-        <a class="btn btn-ghost normal-case text-xl" href="/">Karen-UI</a>
-    </div>
-    <div class="flex btn m-2">
-        <a href="/modules">Modules</a>
-    </div>
-    <div class="flex-none m-2">
-        <a href="/files">
-            <button class="btn btn-square btn-ghost">
+<nav id="header" class="w-full z-29 top-0 text-white bg-white">
+    <div
+        class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2"
+    >
+        <div class="pl-4 flex items-center">
+            <!-- svelte-ignore a11y-invalid-attribute -->
+            <a
+                class="no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
+                href="/"
+            >
+                <div class="w-16">
+                    <img src="/terralens.png" alt="logo" />
+                </div>
+                Home
+            </a>
+        </div>
+        <div class="block lg:hidden pr-4">
+            <button
+                id="nav-toggle"
+                class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out"
+            >
                 <svg
+                    class="fill-current h-6 w-6"
+                    viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    class="w-6 h-6"
                 >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-                    />
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
                 </svg>
             </button>
-        </a>
+        </div>
+        <div
+            class="hidden w-full flex-grow lg:flex lg:items-center lg:w-auto mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20"
+            id="nav-content"
+        >
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                <li class="mr-3">
+                    <!-- svelte-ignore a11y-invalid-attribute -->
+                    <a
+                        class="inline-block py-2 px-4 text-black font-bold no-underline"
+                        href="/">Home</a
+                    >
+                </li>
+                <li class="mr-3">
+                    <!-- svelte-ignore a11y-invalid-attribute -->
+                    <a
+                        class="inline-block py-2 px-4 text-black font-bold no-underline"
+                        href="/modules">Modules</a
+                    >
+                </li>
+                <li class="mr-3">
+                    <!-- svelte-ignore a11y-invalid-attribute -->
+                    <a
+                        class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+                        href="/files">Upload</a
+                    >
+                </li>
+            </ul>
+            <SignInStatus />
+        </div>
     </div>
-
-    <div class="flex m-2">
-        <SignInStatus />
-    </div>
-</div>
+    <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
+</nav>

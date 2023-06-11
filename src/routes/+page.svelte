@@ -1,9 +1,6 @@
 <script lang="ts">
+    import LandingPage from "$lib/landing/LandingPage.svelte";
 </script>
 
-<div class="flex">
-    This is supposed to be a landing page
-</div>
+<LandingPage/>
 
-<style>
-</style>

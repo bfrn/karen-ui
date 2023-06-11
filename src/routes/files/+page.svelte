@@ -1,86 +1,23 @@
 <script lang="ts">
-    import { error } from "@sveltejs/kit";
     import {
-        saveFile,
         fetchNamespaces,
         dropNamespace as storeDropNamespace,
     } from "../../stores/nodes/nodes";
-    import { fetchParsedFile } from "$lib/files/preprocessor";
-    import { checkFileType } from "$lib/files/typecheck";
     import { FileType } from "$lib/files/types";
+    import { uploadFile } from "$lib/files/upload";
+    import { checkFileType } from "$lib/files/typecheck";
 
-    let files: FileList | undefined = undefined;
+    let files: FileList;
     let fetchNamespacePromise = fetchNamespaces();
-    let customNamespaceName = "";
-    let fileType = FileType.Undefined;
+    let customNamespaceName: string|null = null;
+    let fileType: FileType|null = null;
     let url = "";
     let formSubmitted = false;
 
-    function refetchNamespaces() {
-        fetchNamespacePromise = fetchNamespaces();
-    }
-
-    let submitForm = () => {
-        if (fileType === FileType.Plan && !url) {
-            formSubmitted = true;
-            return false; // Prevent form submission
-        }
-        uploadFile()
-    };
-
-    async function uploadFile() {
-        if (files !== undefined) {
-            for (const file of files) {
-                const content = await file.text();
-                const filename = file.name;
-                const fileType = checkFileType(content);
-
-                switch (fileType) {
-                    case FileType.Karen:
-                        await save(content, filename);
-                        break;
-                    case FileType.Plan:
-                        handlePlanFile(content, filename);
-                        break;
-                    case FileType.State:
-                        await handleStateFile(content, filename);
-                        break;
-                    case FileType.Undefined:
-                        console.error("Unknown file type");
-                    default:
-                        break;
-                }
-            }
-        }
-    }
-    async function handleStateFile(content: string, filename: string) {
-        const response = await fetchParsedFile(content, fileType);
-        content = JSON.stringify(response);
-        save(content, filename);
-    }
-    async function handlePlanFile(content: string, filename: string) {
-        const response = await fetchParsedFile(content, fileType, url);
-        content = JSON.stringify(response);
-        save(content, filename);
-    }
-
-    async function save(content: string, filename: string) {
-        try {
-            let namespace = filename;
-            if (customNamespaceName !== "") {
-                namespace = customNamespaceName;
-            }
-            await saveFile(namespace, content);
-            refetchNamespaces();
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    function handleFileUpload(event: any) {
+    let handleFileUpload = (event: any) => {
         const fileList = event.target.files;
         const file = fileList[0]; // Assuming only one file is selected
-
+        console.log("kek")
         const reader = new FileReader();
         reader.onload = (e) => {
             const content = e.target?.result;
@@ -90,9 +27,19 @@
             }
         };
         reader.readAsText(file);
-    }
+    };
 
-    async function dropNamespace(namespace: string) {
+    let submitForm = async () => {
+        if (fileType === FileType.Plan && !url) {
+            formSubmitted = true;
+            return false; // Prevent form submission
+        }
+        console.log("submit  " + fileType)
+        await uploadFile(Array.from(files), url, fileType, customNamespaceName);
+        refetchNamespaces()
+    };
+
+    let dropNamespace = async (namespace: string) => {
         try {
             await storeDropNamespace(namespace);
             refetchNamespaces();
@@ -102,7 +49,11 @@
         // storeDropNamespace(namespace)
         //     .then((_) => refetchNamespaces())
         //     .catch((error) => console.error(error));
-    }
+    };
+
+    let refetchNamespaces = () => {
+        fetchNamespacePromise = fetchNamespaces();
+    };
 </script>
 
 <template>
@@ -111,7 +62,7 @@
         accept=".json"
         bind:files
         class="file-input file-input-bordered ml-4 mt-4"
-        on:change={handleFileUpload}
+        autocomplete="off"
         on:input={handleFileUpload}
     />
 
@@ -129,7 +80,7 @@
                         data-tip="If no name is provided the filename will be used."
                         class="tooltip"
                     >
-                        <button class="btn" type="submit" >Save</button>
+                        <button class="btn" type="submit">Save</button>
                     </div>
                 </div>
             </div>

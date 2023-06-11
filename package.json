@@ -1,5 +1,5 @@
 {
-  "name": "karen-ui",
+  "name": "TerraLens-ui",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -15,7 +15,8 @@
     "@auth/sveltekit": "^0.3.1",
     "cytoscape": "^3.23.0",
     "cytoscape-fcose": "^2.1.0",
-    "daisyui": "^2.33.0"
+    "daisyui": "^2.33.0",
+    "svelte-file-dropzone": "^2.0.1"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "next",
