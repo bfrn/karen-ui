@@ -1,7 +1,12 @@
+import { redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types"
+import { authorized } from "$lib/auth/auth";
 
-export const load: LayoutServerLoad = async (event) => {
-  return {
-    session: await event.locals.getSession(),
-  }
-}
+
+export const load = ( async ({ locals, url }) => {
+  const session = await locals?.getSession();
+  if (!authorized(session, url)) {
+      throw redirect(307, '/auth/signin');
+  } 
+  return { session }
+}) satisfies LayoutServerLoad;

@@ -6,6 +6,9 @@
     <div class="flex-1">
         <a class="btn btn-ghost normal-case text-xl" href="/">Karen-UI</a>
     </div>
+    <div class="flex btn">
+        <a  href="/modules">Modules</a>
+    </div>
     <div class="flex-1">
         <SignInStatus />
     </div>
