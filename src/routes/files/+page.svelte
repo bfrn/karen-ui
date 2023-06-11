@@ -5,7 +5,7 @@
         fetchNamespaces,
         dropNamespace as storeDropNamespace,
     } from "../../stores/nodes/nodes";
-    import { fetchParsedFile } from "$lib/api/preprocessor";
+    import { fetchParsedFile } from "$lib/files/preprocessor";
     import { checkFileType } from "$lib/files/typecheck";
     import { FileType } from "$lib/files/types";
 

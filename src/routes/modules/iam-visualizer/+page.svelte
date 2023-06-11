@@ -1,7 +1,7 @@
 <script lang="ts">
     import IamVisualizer from "$lib/iam-visualizer/IamVisualizer.svelte";
-    import { nodeStore } from "../../stores/nodes/nodes";
-    import { iconStore } from "../../stores/icons/icons";
+    import { nodeStore } from "../../../stores/nodes/nodes";
+    import { iconStore } from "../../../stores/icons/icons";
 
     var selectedNodeTable = nodeStore.getters.getSelectedNodeTable();
 
