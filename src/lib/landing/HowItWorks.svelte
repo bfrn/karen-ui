@@ -16,7 +16,7 @@
                     1 Upload
                 </h3>
                 <p class="text-gray-600 mb-8">
-                    Your terraform file is uploaded, prepared and
+                    Your terraform file is uploaded to our backend, prepared and
                     then stored locally in your browser. Ready for you to dive deeper!
                     <br />
                     <br />
