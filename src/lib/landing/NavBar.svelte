@@ -28,7 +28,7 @@
 <nav
   id="header"
   class={`
-  fixed w-full z-29 top-0 text-white
+  fixed w-full z-50 top-0 text-white
   ${navFloat && "bg-white"}
   `}
 >

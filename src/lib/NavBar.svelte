@@ -2,7 +2,7 @@
     import SignInStatus from "./auth/SignInStatus.svelte";
 </script>
 
-<nav id="header" class="w-full z-29 top-0 text-white bg-white">
+<nav id="header" class="w-full z-29 top-0 text-black bg-white">
     <div
         class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2"
     >
@@ -15,7 +15,7 @@
                 <div class="w-16">
                     <img src="/terralens.png" alt="logo" />
                 </div>
-                Home
+                TerraLens
             </a>
         </div>
         <div class="block lg:hidden pr-4">
@@ -41,21 +41,21 @@
                 <li class="mr-3">
                     <!-- svelte-ignore a11y-invalid-attribute -->
                     <a
-                        class="inline-block py-2 px-4 text-black font-bold no-underline"
+                        class="inline-block text-black no-underline hover:text-green-800 hover:text-underline py-2 px-4"
                         href="/">Home</a
                     >
                 </li>
                 <li class="mr-3">
                     <!-- svelte-ignore a11y-invalid-attribute -->
                     <a
-                        class="inline-block py-2 px-4 text-black font-bold no-underline"
+                        class="inline-block text-black no-underline hover:text-green-800 hover:text-underline py-2 px-4"
                         href="/modules">Modules</a
                     >
                 </li>
                 <li class="mr-3">
                     <!-- svelte-ignore a11y-invalid-attribute -->
                     <a
-                        class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4"
+                        class="inline-block text-black no-underline hover:text-green-800 hover:text-underline py-2 px-4"
                         href="/files">Upload</a
                     >
                 </li>

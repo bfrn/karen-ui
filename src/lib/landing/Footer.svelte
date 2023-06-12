@@ -28,7 +28,7 @@
 				</ul>
 			</div>
 			<div class="flex-1">
-				<p class="text-gray-500 md:mb-6">(c) 2023 terralens.de - All rights reserved</p>
+				<p class="text-gray-500 md:mb-6">(c) 2023 terralens.net - All rights reserved</p>
 			</div>
 		</div>
 	</div>

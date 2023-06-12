@@ -26,7 +26,7 @@
 </script>
 
 <div
-    class="dragdrop-zone z-50 w-4/5"
+    class="dragdrop-zone z-40 w-4/5"
     on:mouseenter={handleMouseOver}
     on:mouseleave={handleMouseOut}
 >
@@ -58,8 +58,10 @@
                     d="M257 117l0 0c8,0 15,7 15,15l0 108 108 0c8,0 15,7 15,15l0 0c0,8 -7,15 -15,15l-108 0 0 108c0,8 -7,15 -15,15l0 0c-8,0 -15,-7 -15,-15l0 -108 -108 0c-8,0 -15,-7 -15,-15l0 0c0,-8 7,-15 15,-15l108 0 0 -108c0,-8 7,-15 15,-15z"
                 />
             </svg>
-            <h3>Start free visualization</h3>
-            <p>Drag & Drop your terraform state file</p>
+            <span>
+                <h3 class="font-semibold">Start free visualization</h3>
+                <p>Drag & Drop your terraform state or plan file</p>
+            </span>
         </div>
     </Dropzone>
 </div>
@@ -70,7 +72,7 @@
     }
     .dragdrop-zone {
         transition: all 1s;
-        transition-timing-function: cubic-bezier(.17,.67,.91,.39);
+        transition-timing-function: cubic-bezier(0.17, 0.67, 0.91, 0.39);
         transform-origin: 50% 50%;
     }
 </style>
