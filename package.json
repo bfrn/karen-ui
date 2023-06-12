@@ -10,16 +10,18 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
   },
+  "prepare": "svelte-kit sync",
   "dependencies": {
     "@auth/core": "^0.8.2",
     "@auth/sveltekit": "^0.3.1",
     "cytoscape": "^3.23.0",
     "cytoscape-fcose": "^2.1.0",
     "daisyui": "^2.33.0",
+    "dotenv": "^16.1.4",
     "svelte-file-dropzone": "^2.0.1"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "next",
+    "@sveltejs/adapter-node": "^1.2.4",
     "@sveltejs/kit": "^1.20.2",
     "@tailwindcss/typography": "^0.5.7",
     "@types/cytoscape": "^3.19.9",

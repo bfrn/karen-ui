@@ -10,7 +10,10 @@
             <Profile />
         {/if}
     {:else}
-        <a href="/auth/signin" data-sveltekit-preload-data="off">
+        <a 
+        href="/auth/signin" 
+        rel="external"
+        data-sveltekit-preload-data="off">
             <Button center={false}>Sign in</Button>
         </a>
     {/if}

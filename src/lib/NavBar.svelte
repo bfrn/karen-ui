@@ -10,7 +10,6 @@
   let homeHref = "/";
   let isHome = false
   if ($page.route.id === "/") {
-    console.log($page.route);
     position = "fixed";
     homeHref = "#top";
     isHome = true
