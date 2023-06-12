@@ -4,13 +4,16 @@
     import Profile from "./Profile.svelte";
 </script>
 
-<div class="flex">
+<div class="flex mr-3">
     {#if $page.data.session}
         {#if $page.data.session.user?.image}
             <Profile />
         {/if}
     {:else}
-        <a href="/auth/signin" data-sveltekit-preload-data="off">
+        <a 
+        href="/auth/signin" 
+        rel="external"
+        data-sveltekit-preload-data="off">
             <Button center={false}>Sign in</Button>
         </a>
     {/if}

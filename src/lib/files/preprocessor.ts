@@ -1,4 +1,4 @@
-const preprocessorURL = "http://localhost:3000"
+const preprocessorURL = "https://terralens-preprocessor.onrender.com"
 
 interface ParseFileRequestData {
     data: string;

@@ -17,7 +17,6 @@
     let handleFileUpload = (event: any) => {
         const fileList = event.target.files;
         const file = fileList[0]; // Assuming only one file is selected
-        console.log("kek")
         const reader = new FileReader();
         reader.onload = (e) => {
             const content = e.target?.result;
@@ -34,7 +33,6 @@
             formSubmitted = true;
             return false; // Prevent form submission
         }
-        console.log("submit  " + fileType)
         await uploadFile(Array.from(files), url, fileType, customNamespaceName);
         refetchNamespaces()
     };

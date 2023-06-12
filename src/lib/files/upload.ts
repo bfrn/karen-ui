@@ -16,8 +16,6 @@ export async function uploadFile(files: File[], url: string = "", fileType: File
             fileType = checkFileType(content);
         }
 
-        console.log(fileType)
-
         switch (fileType) {
             case FileType.Karen:
                 await save(content, filename);

@@ -2,26 +2,25 @@
   import SignInStatus from "./auth/SignInStatus.svelte";
   import { clickOutside, clickOutsideAction } from "$lib/actions/clickOutside";
   import { page } from "$app/stores";
-    import { goto } from "$app/navigation";
+  import { goto } from "$app/navigation";
+  import Beggar from "./Beggar.svelte";
 
   let y: number;
 
   let position = "relative";
   let homeHref = "/";
-  let isHome = false
+  let isHome = false;
   if ($page.route.id === "/") {
-    console.log($page.route);
     position = "fixed";
     homeHref = "#top";
-    isHome = true
+    isHome = true;
   }
 
   function goHome() {
-    
     if ($page.route.id === "/") {
       document.body.scrollIntoView();
-    } else{
-      goto("/")
+    } else {
+      goto("/");
     }
   }
 
@@ -60,8 +59,8 @@
       <!-- svelte-ignore a11y-invalid-attribute -->
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <a
-        class:text-gray-800={navFloat||!isHome}
-        class:text-white={!navFloat&&isHome}
+        class:text-gray-800={navFloat || !isHome}
+        class:text-white={!navFloat && isHome}
         class="no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
         href="#"
         on:click={goHome}
@@ -96,6 +95,9 @@
       id="nav-content"
     >
       <ul class="list-reset lg:flex justify-end flex-1 items-center">
+        <li class="w-1/5 mr-3">
+          <Beggar/>
+        </li>
         <li class="mr-3">
           <!-- svelte-ignore a11y-invalid-attribute -->
           <a
