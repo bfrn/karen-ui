@@ -4,7 +4,7 @@
     import Profile from "./Profile.svelte";
 </script>
 
-<div class="flex">
+<div class="flex mr-3">
     {#if $page.data.session}
         {#if $page.data.session.user?.image}
             <Profile />
