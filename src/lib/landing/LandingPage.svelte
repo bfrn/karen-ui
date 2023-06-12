@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Hero from './Hero.svelte';
 	import Footer from './Footer.svelte';
-    import NavBar from './NavBar.svelte';
+    import NavBar from '../NavBar.svelte';
     import HowItWorks from './HowItWorks.svelte';
     import CallToAction from './CallToAction.svelte';
 </script>

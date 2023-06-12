@@ -178,7 +178,7 @@
                     </h3>
                     <p class="text-gray-600 mb-8">
                         Lens into your infrastructure. 
-                        Inspect your security architecture and detect security risk such as missconfigured IAM roles.
+                        Inspect your security architecture and detect security risk, such as missconfigured IAM roles.
                     </p>
                 </div>
             </div>
